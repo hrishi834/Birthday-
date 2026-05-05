@@ -259,15 +259,63 @@ display: flex; justify-content: center; gap: 6px;
 }
 @keyframes floatRow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-.badge-21 {
-display: inline-block;
-background: linear-gradient(135deg, #ffd54f, #ffca28);
-color: #5a3000;
+.badge-21-wrap {
+position: relative;
+margin-bottom: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.badge-21-num {
 font-family: ‘Pacifico’, cursive;
-font-size: 1rem; padding: 8px 24px;
-border-radius: 50px; margin-bottom: 16px;
-box-shadow: 0 4px 16px rgba(255,193,7,.4);
-letter-spacing: .03em;
+font-size: 9rem;
+line-height: 1;
+background: linear-gradient(160deg, #ffd54f 0%, #ffb300 40%, #ff8f00 70%, #ffd54f 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 6px 24px rgba(255,160,0,.45));
+animation: pulse21 2.5s ease-in-out infinite;
+position: relative;
+z-index: 1;
+}
+@keyframes pulse21 {
+0%,100% { filter: drop-shadow(0 6px 24px rgba(255,160,0,.45)); transform: scale(1); }
+50%      { filter: drop-shadow(0 8px 40px rgba(255,160,0,.75)); transform: scale(1.04); }
+}
+
+.badge-21-label {
+font-family: ‘Pacifico’, cursive;
+font-size: 1.5rem;
+color: var(–deep);
+letter-spacing: .06em;
+margin-top: -14px;
+text-shadow: 0 2px 10px rgba(233,30,140,.2);
+position: relative; z-index: 1;
+}
+
+.badge-21-stars {
+display: flex; gap: 10px; font-size: 1.4rem;
+margin-top: 6px; margin-bottom: 6px;
+animation: floatRow 3s ease-in-out infinite;
+}
+
+/* glowing ring behind the 21 */
+.badge-21-wrap::before {
+content: ‘’;
+position: absolute;
+width: 200px; height: 200px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(255,213,79,.35) 0%, transparent 70%);
+top: 50%; left: 50%;
+transform: translate(-50%, -55%);
+pointer-events: none;
+animation: glowRing 2.5s ease-in-out infinite;
+}
+@keyframes glowRing {
+0%,100% { transform: translate(-50%,-55%) scale(1); opacity:.7; }
+50%      { transform: translate(-50%,-55%) scale(1.15); opacity:1; }
 }
 
 .s-title {
@@ -387,7 +435,11 @@ transition: all .3s; letter-spacing: .06em;
 <div id="page-surprise">
   <div class="surprise-inner">
     <div class="balloons-row">🎈 🎉 🎁 🎊 🎈</div>
-    <div class="badge-21">🌟 Turning 21 Today! 🌟</div>
+    <div class="badge-21-wrap">
+      <div class="badge-21-num">21</div>
+      <div class="badge-21-stars">✨ 🌟 ✨ 🌟 ✨</div>
+      <div class="badge-21-label">Years of Magic</div>
+    </div>
     <h1 class="s-title">Happy Birthday,<br>Didi!</h1>
     <p class="s-date">6th May — Your Most Magical Day 💛</p>
 
